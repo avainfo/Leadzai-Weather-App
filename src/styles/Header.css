@@ -1,0 +1,11 @@
+.app-header {
+  background: #455A64;
+  height: 10vh;
+  font-size: 2rem;
+  color: white;
+  font-weight: 500;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

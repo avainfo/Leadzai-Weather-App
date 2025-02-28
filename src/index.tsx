@@ -1,5 +1,5 @@
 import './index.css';
-import App from './App';
+import HomePage from './pages/HomePage';
 import {StrictMode} from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -8,6 +8,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
 	<StrictMode>
-		<App/>
+		<HomePage/>
 	</StrictMode>
 );
