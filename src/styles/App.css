@@ -2,4 +2,7 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  background: #607D8B;
+  width: 100vw;
+  height: 100vh;
 }
