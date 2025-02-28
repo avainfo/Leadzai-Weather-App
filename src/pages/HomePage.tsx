@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import WeatherHeader from "../layout/WeatherHeader";
 import {useState} from "react";
 import {Temperature} from "../components/Temperature";
+import {TemperatureIcon} from "../components/TemperatureIcon";
 
 function HomePage() {
 	const [isFahrenheit, setIsFahrenheit] = useState(
@@ -14,6 +15,7 @@ function HomePage() {
 			<section className="body">
 				<WeatherHeader onToggle={setIsFahrenheit}/>
 				<Temperature isFahrenheit={isFahrenheit}/>
+				<TemperatureIcon/>
 			</section>
 		</div>
 	);
