@@ -1,15 +1,13 @@
 import '../styles/App.css';
 import Header from "../components/Header";
-import Selector from "../components/Selector";
-import UnitSelector from "../components/UnitSelector";
+import WeatherHeader from "../layout/WeatherHeader";
 
 function HomePage() {
 	return (
 		<div className="app">
 			<Header/>
 			<section className="body">
-				<Selector/>
-				<UnitSelector/>
+				<WeatherHeader/>
 			</section>
 		</div>
 	);

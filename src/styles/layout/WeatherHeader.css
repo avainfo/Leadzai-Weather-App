@@ -1,0 +1,8 @@
+.weather-header {
+  display: flex;
+  flex-direction: row;
+  width: 50vw;
+  margin-left: 25vw;
+  margin-top: 5vh;
+  justify-content: space-between;
+}
