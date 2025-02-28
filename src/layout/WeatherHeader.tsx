@@ -2,9 +2,9 @@ import Selector from "../components/Selector";
 import UnitSelector from "../components/UnitSelector";
 import '../styles/layout/WeatherHeader.css'
 
-export default function WeatherHeader() {
+export default function WeatherHeader({onToggle}: {onToggle: (b: boolean) => void}) {
 	return <div className="weather-header">
 		<Selector/>
-		<UnitSelector/>
+		<UnitSelector onToggle={onToggle}/>
 	</div>;
 }
