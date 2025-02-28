@@ -1,6 +1,7 @@
 import '../styles/App.css';
 import Header from "../components/Header";
 import Selector from "../components/Selector";
+import UnitSelector from "../components/UnitSelector";
 
 function HomePage() {
 	return (
@@ -8,6 +9,7 @@ function HomePage() {
 			<Header/>
 			<section className="body">
 				<Selector/>
+				<UnitSelector/>
 			</section>
 		</div>
 	);
