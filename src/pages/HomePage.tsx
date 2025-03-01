@@ -12,7 +12,7 @@ function HomePage() {
 		(): boolean => JSON.parse(localStorage.getItem("isChecked") as string) || false
 	);
 	const [city, setCity] = useState(
-		(): boolean => JSON.parse(localStorage.getItem("city") as string) || "Viana do Castelo"
+		(): string => JSON.parse(localStorage.getItem("city") as string) || "Viana do Castelo"
 	);
 
 	const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -50,7 +50,7 @@ function HomePage() {
 
 		fetchData();
 		return () => controller.abort();
-	}, []);
+	}, [city]);
 
 	return (
 		<div className="app">
@@ -60,7 +60,7 @@ function HomePage() {
 
 			{weatherData && (
 				<section className="body">
-					<WeatherHeader onToggle={setIsFahrenheit}/>
+					<WeatherHeader onToggle={setIsFahrenheit} onSelectCity={(selectedCity) => setCity(selectedCity)}/>
 					<Temperature
 						temperature={weatherData.main.temp}
 						isFahrenheit={isFahrenheit}/>
