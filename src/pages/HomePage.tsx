@@ -8,23 +8,47 @@ import WeatherData from "../types/WeatherData";
 import WeatherHeader from "../layout/WeatherHeader";
 
 function HomePage() {
-	const [isFahrenheit, setIsFahrenheit] = useState(
-		(): boolean => JSON.parse(localStorage.getItem("isChecked") as string) || false
-	);
-	const [city, setCity] = useState(
-		(): string => JSON.parse(localStorage.getItem("city") as string) || "Viana do Castelo"
-	);
+	const [isFahrenheit, setIsFahrenheit] = useState<boolean>(() => {
+		return localStorage.getItem("isChecked") ? JSON.parse(localStorage.getItem("isChecked") as string) : false;
+	});
+
+	const [city, setCity] = useState<string>(() => {
+		return localStorage.getItem("city") ? JSON.parse(localStorage.getItem("city") as string) : "Viana do Castelo";
+	});
+
+	useEffect(() => {
+		localStorage.setItem("isChecked", JSON.stringify(isFahrenheit));
+	}, [isFahrenheit]);
+
+	useEffect(() => {
+		localStorage.setItem("city", JSON.stringify(city));
+	}, [city]);
 
 	const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
+
 	const API_KEY = process.env.REACT_APP_API_KEY;
+
+	useEffect(() => {
+		if (!API_KEY) {
+			console.error("OpenWeatherMap API KEY missing in environment !");
+			setError("Incorrect API configuration.");
+			return;
+		}
+	}, []);
+
+
 	const url = `https://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}&q=${city}&units=metric`;
 
 	useEffect(() => {
+		if (!API_KEY) return;
+
 		const controller = new AbortController();
+		const timeout = setTimeout(() => controller.abort(), 7500);
 		const signal = controller.signal;
+
 		const fetchData = async () => {
 			try {
 				setLoading(true);
@@ -32,11 +56,21 @@ function HomePage() {
 
 				const response = await fetch(url, {signal});
 
+				if (response.status === 404) {
+					setError("City not found!");
+					return;
+				}
+
 				if (!response.ok) {
 					throw new Error("Failed to fetch weather data");
 				}
 
 				const data: WeatherData = await response.json();
+
+				if (!data.main || !data.weather) {
+					setError("Weather Data error!");
+					return;
+				}
 
 				setWeatherData(data);
 			} catch (e) {
@@ -49,7 +83,10 @@ function HomePage() {
 		}
 
 		fetchData();
-		return () => controller.abort();
+		return () => {
+			clearTimeout(timeout);
+			controller.abort();
+		};
 	}, [city]);
 
 	return (
