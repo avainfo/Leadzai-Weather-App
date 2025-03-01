@@ -23,7 +23,6 @@ function HomePage() {
 	const url = `https://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}&q=${city}&units=metric`;
 
 	useEffect(() => {
-		console.log("API URL:", url);
 		const controller = new AbortController();
 		const signal = controller.signal;
 		const fetchData = async () => {
