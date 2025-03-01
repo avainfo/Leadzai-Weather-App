@@ -1,6 +1,6 @@
 import '../styles/App.css';
 import Header from "../components/Header";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import Temperature from "../components/Temperature";
 import TemperatureIcon from "../components/TemperatureIcon";
 import WeatherFooter from "../layout/WeatherFooter";
@@ -18,11 +18,8 @@ function HomePage() {
 
 	useEffect(() => {
 		localStorage.setItem("isChecked", JSON.stringify(isFahrenheit));
-	}, [isFahrenheit]);
-
-	useEffect(() => {
 		localStorage.setItem("city", JSON.stringify(city));
-	}, [city]);
+	}, [isFahrenheit, city]);
 
 	const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 	const [loading, setLoading] = useState(true);
@@ -39,8 +36,9 @@ function HomePage() {
 		}
 	}, []);
 
-
-	const url = `https://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}&q=${city}&units=metric`;
+	const url = useMemo(() => {
+		return `https://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}&q=${city}&units=metric`;
+	}, [city]);
 
 	useEffect(() => {
 		if (!API_KEY) return;
