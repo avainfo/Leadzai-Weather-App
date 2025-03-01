@@ -1,4 +1,4 @@
-export interface WeatherData {
+export default interface WeatherData {
 	main: {
 		temp: number,
 	},

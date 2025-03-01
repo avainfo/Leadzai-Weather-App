@@ -1,10 +1,10 @@
 import '../styles/App.css';
 import Header from "../components/Header";
 import {useEffect, useState} from "react";
-import {Temperature} from "../components/Temperature";
+import Temperature from "../components/Temperature";
 import TemperatureIcon from "../components/TemperatureIcon";
 import WeatherFooter from "../layout/WeatherFooter";
-import {WeatherData} from "../types/WeatherData";
+import WeatherData from "../types/WeatherData";
 import WeatherHeader from "../layout/WeatherHeader";
 
 function HomePage() {
