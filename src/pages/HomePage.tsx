@@ -97,7 +97,10 @@ function HomePage() {
 
 			{weatherData && (
 				<section className="body">
-					<WeatherHeader onToggle={setIsFahrenheit} onSelectCity={(selectedCity) => setCity(selectedCity)}/>
+					<WeatherHeader
+						onToggle={setIsFahrenheit}
+						onSelectCity={(selectedCity) => setCity(selectedCity)}
+						selectedCity={city}/>
 					<Temperature
 						temperature={weatherData.main.temp}
 						isFahrenheit={isFahrenheit}/>
