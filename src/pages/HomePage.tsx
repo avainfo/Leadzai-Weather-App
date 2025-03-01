@@ -15,7 +15,7 @@ function HomePage() {
 			<Header/>
 			<section className="body">
 				<WeatherHeader onToggle={setIsFahrenheit}/>
-				<Temperature isFahrenheit={isFahrenheit}/>
+				<Temperature temperature={15} isFahrenheit={isFahrenheit}/>
 				<TemperatureIcon/>
 				<WeatherFooter sunrise={"7:47"} sunset={"18:42"}/>
 			</section>
