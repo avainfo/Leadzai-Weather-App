@@ -2,7 +2,7 @@ import '../styles/App.css';
 import Header from "../components/Header";
 import {useEffect, useState} from "react";
 import {Temperature} from "../components/Temperature";
-import {TemperatureIcon} from "../components/TemperatureIcon";
+import TemperatureIcon from "../components/TemperatureIcon";
 import WeatherFooter from "../layout/WeatherFooter";
 import {WeatherData} from "../types/WeatherData";
 import WeatherHeader from "../layout/WeatherHeader";
@@ -64,7 +64,7 @@ function HomePage() {
 					<Temperature
 						temperature={weatherData.main.temp}
 						isFahrenheit={isFahrenheit}/>
-					<TemperatureIcon/>
+					<TemperatureIcon iconKey={weatherData.weather[0].icon}/>
 					<WeatherFooter
 						sunrise={weatherData.sys.sunrise}
 						sunset={weatherData.sys.sunset}/>
