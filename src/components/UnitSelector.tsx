@@ -1,10 +1,9 @@
 import '../styles/components/UnitSelector.css';
 import {useEffect, useState} from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function UnitSelector({onToggle}: { onToggle: (b: boolean) => void }) {
-	const [isChecked, setIsChecked] = useState(
-		() => JSON.parse(localStorage.getItem("isChecked") as string) || false
-	);
+	const [isChecked, setIsChecked] = useLocalStorage<boolean>("isChecked", false);
 
 	useEffect(() => {
 		localStorage.setItem("isChecked", JSON.stringify(isChecked));
