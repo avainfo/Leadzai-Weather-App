@@ -6,12 +6,21 @@ import WeatherFooter from "../layout/WeatherFooter";
 import WeatherHeader from "../layout/WeatherHeader";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useWeatherData from "../hooks/useWeatherData";
+import {useCallback} from "react";
 
 function HomePage() {
 	const [isFahrenheit, setIsFahrenheit] = useLocalStorage<boolean>("isChecked", false);
 	const [city, setCity] = useLocalStorage<string>("city", "Viana do Castelo");
 
 	const {weatherData, loading, error} = useWeatherData(city, process.env.REACT_APP_API_KEY);
+
+	const handleToggleFahrenheit = useCallback((value: boolean) => {
+		setIsFahrenheit(value);
+	}, [setIsFahrenheit]);
+
+	const handleSelectCity = useCallback((selectedCity: string) => {
+		setCity(selectedCity);
+	}, [setCity]);
 
 	return (
 		<div className="app">
@@ -22,8 +31,8 @@ function HomePage() {
 			{weatherData && (
 				<section className="body">
 					<WeatherHeader
-						onToggle={setIsFahrenheit}
-						onSelectCity={(selectedCity) => setCity(selectedCity)}
+						onToggle={handleToggleFahrenheit}
+						onSelectCity={(selectedCity) => handleSelectCity(selectedCity)}
 						selectedCity={city}/>
 					<Temperature
 						temperature={weatherData.main.temp}
